@@ -1,0 +1,44 @@
+﻿startup {
+  actorsystem: "main" #POPULATE NAME OF YOUR ACTOR SYSTEM HERE
+}
+
+akka {  
+  loglevel = OFF
+  
+  actor {
+    provider = cluster
+    deployment {
+      /watchers {
+        router = round-robin-pool
+        nr-of-instances = 1
+      }
+    }
+  }
+              
+  remote {
+    # log-remote-lifecycle-events = DEBUG
+  
+    dot-netty.tcp {
+      transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport, Akka.Remote"
+      applied-adapters = []
+      transport-protocol = tcp
+      
+      public-hostname = "127.0.0.1"
+      hostname = "0.0.0.0"
+      port = 0
+    }
+  }            
+  
+  cluster {
+    downing-provider-class = "Akka.Cluster.SplitBrainResolver, Akka.Cluster"
+    split-brain-resolver {
+      active-strategy = keep-majority
+      stable-after = 10s 
+    }
+
+    seed-nodes = ["akka.tcp://main@127.0.0.1:6009"] 
+    
+    roles = [watcher]
+  }
+
+}
