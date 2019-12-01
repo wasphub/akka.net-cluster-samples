@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{4D0BD252-A5B0-4914-8E21-3247D38315B9}"
 	ProjectSection(SolutionItems) = preProject
 		beacon_main.cmd = beacon_main.cmd
+		submitter.cmd = submitter.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clusters", "Clusters", "{553C0CFD-2D82-4609-9011-BA8E1E86D512}"
