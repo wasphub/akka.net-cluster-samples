@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beacon", "Beacon\Beacon.csproj", "{1FFD7425-D26A-4A91-9818-92765AE691D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beacon", "Beacon\Beacon.csproj", "{1FFD7425-D26A-4A91-9818-92765AE691D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{4D0BD252-A5B0-4914-8E21-3247D38315B9}"
+	ProjectSection(SolutionItems) = preProject
+		beacon_main.cmd = beacon_main.cmd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
