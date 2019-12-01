@@ -19,6 +19,13 @@
   }            
 
   cluster {
+    downing-provider-class = "Akka.Cluster.SplitBrainResolver, Akka.Cluster"
+    split-brain-resolver {
+      active-strategy = keep-majority
+      stable-after = 10s 
+    }
+    down-removal-margin = 30s
+
     seed-nodes = [] 
 
     roles = [beacon]

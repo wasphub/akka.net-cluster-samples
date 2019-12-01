@@ -30,6 +30,12 @@ akka {
   }            
   
   cluster {
+    downing-provider-class = "Akka.Cluster.SplitBrainResolver, Akka.Cluster"
+    split-brain-resolver {
+      active-strategy = keep-majority
+      stable-after = 10s 
+    }
+
     seed-nodes = ["akka.tcp://main@127.0.0.1:6009"] 
     
     roles = [watcher]
