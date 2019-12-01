@@ -1,4 +1,5 @@
 ﻿using Akka.Actor;
+using Akka.Routing;
 using Common.Actors;
 using Common.Commands;
 using Common.Hosting;
@@ -14,7 +15,11 @@ namespace Submitter
             service.Start(new GenericActorSystemHostFactory());
 
             // SETUP 1: All local
-            var worker = service.System.ActorOf(Props.Create(() => new Worker()));
+            //var worker = service.System.ActorOf(Props.Create(() => new Worker()));
+            //var watcher = service.System.ActorOf(Props.Create(() => new Watcher()));
+
+            // SETUP 2: Remote worker
+            var worker = service.System.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "worker-router");
             var watcher = service.System.ActorOf(Props.Create(() => new Watcher()));
 
             // Simple actor dealing with user input and submission to workers

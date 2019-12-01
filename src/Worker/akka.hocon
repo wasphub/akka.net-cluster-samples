@@ -1,0 +1,43 @@
+﻿startup {
+  actorsystem: "main" #POPULATE NAME OF YOUR ACTOR SYSTEM HERE
+}
+
+akka {  
+  loglevel = OFF
+  
+  actor {
+    provider = cluster
+    deployment {
+
+      # Behavior of the 'workers' local router. We know is 'local' because it has no 'cluster' section!
+      /workers {
+
+        # Routing strategy (how we dispatch work to local workers)
+        router = round-robin-pool
+
+        # How many actual worker actors are created and targeted in this node
+        nr-of-instances = 3
+      }
+    }
+  }
+              
+  remote {
+    # log-remote-lifecycle-events = DEBUG
+  
+    dot-netty.tcp {
+      transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport, Akka.Remote"
+      applied-adapters = []
+      transport-protocol = tcp
+      
+      public-hostname = "127.0.0.1"
+      hostname = "0.0.0.0"
+      port = 0
+    }
+  }            
+  
+  cluster {
+    seed-nodes = ["akka.tcp://main@127.0.0.1:6009"] 
+    
+    roles = [worker]
+  }
+}

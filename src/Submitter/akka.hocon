@@ -5,8 +5,34 @@
 akka {  
   loglevel = OFF
   
-  actor {
-    
+actor {
+    provider = cluster
+    deployment {
+
+      # Behavior of the 'worker-router' remoting router. We know is 'remoting' because it has a 'cluster' section!
+      /worker-router {
+        
+        # Routing strategy (how we dispatch work to remote nodes)
+        router = round-robin-group
+
+        # Path under which workers live inside the remote nodes
+        routees.paths = ["/user/workers"]
+
+        cluster {
+          enabled = on
+
+          # This parameter defines how many instances of the router are created local to this process. 
+          # Normally 1 is what you want here.
+          max-nr-of-instances-per-node = 1
+
+          # Here we force the fact that no workers are allowed on this node, they must be all remote.
+          allow-local-routees = off
+
+          # Workers we want to target must be labelled with the 'worker' role.
+          use-role = worker
+        }
+      }
+    }
   }
               
   remote {
@@ -21,7 +47,11 @@ akka {
       hostname = "0.0.0.0"
       port = 0
     }
-  }            
+  } 
   
-  
+  cluster {
+    seed-nodes = ["akka.tcp://main@127.0.0.1:6009"] 
+    
+    roles = [submitter]
+  }
 }
