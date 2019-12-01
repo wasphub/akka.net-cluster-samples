@@ -21,7 +21,8 @@
 
 @section Scripts {
     <script src="~/lib/aspnet-signalr/signalr.js"></script>
-    <script>document.addEventListener('DOMContentLoaded',
+    <script>
+        document.addEventListener('DOMContentLoaded',
             function() {
                 const connection = new signalR.HubConnectionBuilder()
                     .withUrl("/results")
@@ -48,5 +49,6 @@
                     },
                     body: text
                 });
-        }</script>
+        }
+    </script>
 }
