@@ -19,8 +19,12 @@ namespace Submitter
             //var watcher = service.System.ActorOf(Props.Create(() => new Watcher()));
 
             // SETUP 2: Remote worker
+            //var worker = service.System.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "worker-router");
+            //var watcher = service.System.ActorOf(Props.Create(() => new Watcher()));
+
+            // SETUP 3: All remote
             var worker = service.System.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "worker-router");
-            var watcher = service.System.ActorOf(Props.Create(() => new Watcher()));
+            var watcher = service.System.ActorOf(Props.Empty.WithRouter(FromConfig.Instance), "watcher-router");
 
             // Simple actor dealing with user input and submission to workers
             var input = service.System.ActorOf(Props.Create(() => new Input(worker, watcher)));

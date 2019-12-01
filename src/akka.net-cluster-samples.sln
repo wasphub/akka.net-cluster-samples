@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{4D0B
 	ProjectSection(SolutionItems) = preProject
 		beacon_main.cmd = beacon_main.cmd
 		submitter.cmd = submitter.cmd
+		watcher.cmd = watcher.cmd
 		worker.cmd = worker.cmd
 	EndProjectSection
 EndProject
@@ -23,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{74870B2E-C3AA-4E07-ABAB-18A7DFA3CAC2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker", "Worker\Worker.csproj", "{7773AA48-410A-4EC4-B203-B62EC92D8B76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watcher", "Watcher\Watcher.csproj", "{75709294-AC22-4B4A-9CFF-DA9C668A8C0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +49,10 @@ Global
 		{7773AA48-410A-4EC4-B203-B62EC92D8B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7773AA48-410A-4EC4-B203-B62EC92D8B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7773AA48-410A-4EC4-B203-B62EC92D8B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75709294-AC22-4B4A-9CFF-DA9C668A8C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75709294-AC22-4B4A-9CFF-DA9C668A8C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75709294-AC22-4B4A-9CFF-DA9C668A8C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75709294-AC22-4B4A-9CFF-DA9C668A8C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +64,7 @@ Global
 		{4C2CFC65-FFB7-4435-A214-9A0F5A7FC768} = {4D7B117B-87B1-4F89-A825-1A62628A6305}
 		{74870B2E-C3AA-4E07-ABAB-18A7DFA3CAC2} = {2A1E19E7-841D-4457-BAD2-6CE079C99580}
 		{7773AA48-410A-4EC4-B203-B62EC92D8B76} = {4D7B117B-87B1-4F89-A825-1A62628A6305}
+		{75709294-AC22-4B4A-9CFF-DA9C668A8C0C} = {4D7B117B-87B1-4F89-A825-1A62628A6305}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54BCF133-FDD2-47F8-9F66-B3804C50DCEB}
