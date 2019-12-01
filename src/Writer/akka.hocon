@@ -1,0 +1,67 @@
+﻿startup {
+  actorsystem: "main" #POPULATE NAME OF YOUR ACTOR SYSTEM HERE
+}
+
+akka {  
+  loglevel = OFF
+  
+  actor {
+    provider = cluster
+    deployment {
+      /watchers {
+        router = round-robin-pool
+        nr-of-instances = 1
+      }
+    }
+  }
+              
+  remote {
+    # log-remote-lifecycle-events = DEBUG
+  
+    dot-netty.tcp {
+      transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport, Akka.Remote"
+      applied-adapters = []
+      transport-protocol = tcp
+      
+      public-hostname = "127.0.0.1"
+      hostname = "0.0.0.0"
+      port = 0
+    }
+  }            
+  
+  cluster {
+    seed-nodes = ["akka.tcp://main@127.0.0.1:6009"] 
+    
+    roles = [watcher]
+  }
+
+  persistence{
+    journal {
+      plugin = "akka.persistence.journal.sql-server"
+      sql-server {
+        class = "Akka.Persistence.SqlServer.Journal.SqlServerJournal, Akka.Persistence.SqlServer"
+        plugin-dispatcher = "akka.actor.default-dispatcher"
+        connection-string = "Server=(LocalDb)\\MSSQLLocalDB;Database=AkkaClusterSamples;Persist Security Info=False;Integrated Security=true;"
+        connection-timeout = 30s
+        schema-name = dbo
+        table-name = Journal
+        auto-initialize = off
+        timestamp-provider = "Akka.Persistence.Sql.Common.Journal.DefaultTimestampProvider, Akka.Persistence.Sql.Common"
+        metadata-table-name = Metadata
+      }
+    }
+    snapshot-store {
+      plugin = "akka.persistence.snapshot-store.sql-server"
+      sql-server {
+        class = "Akka.Persistence.SqlServer.Snapshot.SqlServerSnapshotStore, Akka.Persistence.SqlServer"
+        plugin-dispatcher = ""akka.actor.default-dispatcher""
+        connection-string = "Server=(LocalDb)\\MSSQLLocalDB;Database=AkkaClusterSamples;Persist Security Info=False;Integrated Security=true;"
+        connection-timeout = 30s
+        schema-name = dbo
+        table-name = Snapshots
+        auto-initialize = off
+      }
+    }
+  }
+
+}
