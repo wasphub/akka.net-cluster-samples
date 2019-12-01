@@ -1,8 +1,8 @@
 ﻿using Akka.Actor;
 
-namespace Beacon
+namespace Common
 {
-    interface IHostFactory
+    public interface IHostFactory
     {
         ActorSystem Launch(string systemName = null, int port = 0);
     }

@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="akka.hocon">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -1,9 +1,9 @@
 ﻿using Akka.Actor;
 using System.Threading.Tasks;
 
-namespace Beacon
+namespace Common
 {
-    class Host
+    public class Host
     {
         private readonly string _actorSystemName;
 
