@@ -8,7 +8,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{4D0BD252-A5B0-4914-8E21-3247D38315B9}"
 	ProjectSection(SolutionItems) = preProject
 		beacon_main.cmd = beacon_main.cmd
+		beacon_sub.cmd = beacon_sub.cmd
 		pub.cmd = pub.cmd
+		sub.cmd = sub.cmd
 		submitter.cmd = submitter.cmd
 		watcher.cmd = watcher.cmd
 		worker.cmd = worker.cmd
@@ -21,24 +23,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Main", "Main", "{4D7B117B-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{2A1E19E7-841D-4457-BAD2-6CE079C99580}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Submitter", "Submitter\Submitter.csproj", "{4C2CFC65-FFB7-4435-A214-9A0F5A7FC768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Submitter", "Submitter\Submitter.csproj", "{4C2CFC65-FFB7-4435-A214-9A0F5A7FC768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{74870B2E-C3AA-4E07-ABAB-18A7DFA3CAC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{74870B2E-C3AA-4E07-ABAB-18A7DFA3CAC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker", "Worker\Worker.csproj", "{7773AA48-410A-4EC4-B203-B62EC92D8B76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "Worker\Worker.csproj", "{7773AA48-410A-4EC4-B203-B62EC92D8B76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watcher", "Watcher\Watcher.csproj", "{75709294-AC22-4B4A-9CFF-DA9C668A8C0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Watcher", "Watcher\Watcher.csproj", "{75709294-AC22-4B4A-9CFF-DA9C668A8C0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Writer", "Writer\Writer.csproj", "{14C6062A-B531-4F8F-9696-260CDF23D1B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Writer", "Writer\Writer.csproj", "{14C6062A-B531-4F8F-9696-260CDF23D1B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{B9BBB379-D3FF-4177-9404-B3DE64E54331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{B9BBB379-D3FF-4177-9404-B3DE64E54331}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pub", "Pub\Pub.csproj", "{0F95D03C-7044-465C-ABE2-20A2BA26EC14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pub", "Pub\Pub.csproj", "{0F95D03C-7044-465C-ABE2-20A2BA26EC14}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{0DCCE402-16B5-4C1A-98DB-8B44F61C4868}"
 	ProjectSection(SolutionItems) = preProject
 		cacert.pem = cacert.pem
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Secondary", "Secondary", "{EE081582-8D42-443B-956F-8AB2089AA4EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sub", "Sub\Sub.csproj", "{957261B8-1C38-455F-B25C-DD13C0EC2808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +84,10 @@ Global
 		{0F95D03C-7044-465C-ABE2-20A2BA26EC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F95D03C-7044-465C-ABE2-20A2BA26EC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F95D03C-7044-465C-ABE2-20A2BA26EC14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{957261B8-1C38-455F-B25C-DD13C0EC2808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957261B8-1C38-455F-B25C-DD13C0EC2808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957261B8-1C38-455F-B25C-DD13C0EC2808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{957261B8-1C38-455F-B25C-DD13C0EC2808}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +103,8 @@ Global
 		{14C6062A-B531-4F8F-9696-260CDF23D1B7} = {4D7B117B-87B1-4F89-A825-1A62628A6305}
 		{B9BBB379-D3FF-4177-9404-B3DE64E54331} = {4D7B117B-87B1-4F89-A825-1A62628A6305}
 		{0F95D03C-7044-465C-ABE2-20A2BA26EC14} = {4D7B117B-87B1-4F89-A825-1A62628A6305}
+		{EE081582-8D42-443B-956F-8AB2089AA4EB} = {553C0CFD-2D82-4609-9011-BA8E1E86D512}
+		{957261B8-1C38-455F-B25C-DD13C0EC2808} = {EE081582-8D42-443B-956F-8AB2089AA4EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {54BCF133-FDD2-47F8-9F66-B3804C50DCEB}

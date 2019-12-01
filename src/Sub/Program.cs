@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 
-namespace Pub
+namespace Sub
 {
     class Program
     {
@@ -33,66 +33,71 @@ namespace Pub
             var serviceProvider = services.BuildServiceProvider();
 
             var settings = serviceProvider.GetService<IOptions<Settings>>();
-
             var service = new Host();
             service.Start(new GenericActorSystemHostFactory());
 
-            var props = Props.Create<Publisher>().WithRouter(FromConfig.Instance);
-            var publisher = service.System.ActorOf(props, "watchers");
+            var props = Props.Create<Subscriber>().WithRouter(FromConfig.Instance);
+            var subscriber = service.System.ActorOf(props, "watchers");
 
-            publisher.Tell(new Start(settings.Value.Broker, settings.Value.ConnectionString));
-            
-            Console.WriteLine("[Pub process].");
+            subscriber.Tell(new Start(settings.Value.Broker, settings.Value.ConnectionString));
+
+            Console.WriteLine("[Sub process].");
             Console.WriteLine("Press Control + C to terminate.");
-            Console.CancelKeyPress += async (sender, eventArgs) =>
-            {
-                await service.StopAsync();
-            };
+            Console.CancelKeyPress += async (sender, eventArgs) => { await service.StopAsync(); };
             service.TerminationHandle.Wait();
         }
     }
 
-    class Publisher : ReceiveActor
+    class Subscriber : ReceiveActor
     {
-        IProducer<Null, string> _producer;
-        string topic = "writer";    //topic name, with Event Hubs this needs to be defined in Azure Portal
+        IConsumer<Ignore, string> _consumer;
 
-        public Publisher()
+        public Subscriber()
         {
+            string topic = "writer";
             string caCertLocation = ".\\cacert.pem";
+            string consumerGroup = "$Default";
 
             Receive<Start>(m =>
             {
-                var config = new ProducerConfig
+                var config = new ConsumerConfig
                 {
                     BootstrapServers = m.Broker,
                     SecurityProtocol = SecurityProtocol.SaslSsl,
+                    SocketTimeoutMs = 60000,                //this corresponds to the Consumer config `request.timeout.ms`
+                    SessionTimeoutMs = 30000,
                     SaslMechanism = SaslMechanism.Plain,
                     SaslUsername = "$ConnectionString",
                     SaslPassword = m.ConnectionString,
                     SslCaLocation = caCertLocation,
+                    GroupId = consumerGroup,
+                    AutoOffsetReset = AutoOffsetReset.Earliest,
+                    BrokerVersionFallback = "1.0.0",        //Event Hubs for Kafka Ecosystems supports Kafka v1.0+, a fallback to an older API will fail
+                                                            //Debug = "security,broker,protocol"    //Uncomment for librdkafka debugging information
                 };
 
-                _producer = new ProducerBuilder<Null, string>(config).Build();
+                _consumer = new ConsumerBuilder<Ignore, string>(config).Build();
+                _consumer.Subscribe(topic);
+
+                Self.Tell(new Pull());
 
                 Become(Ready);
             });
+
+            void Ready()
+            {
+                Receive<Pull>(_ =>
+                {
+                    var cr = _consumer.Consume();
+
+                    if (cr != null)
+                        Console.WriteLine($"I got '{cr.Value}' from kafka!");
+
+                    Self.Tell(new Pull());
+                });
+            }
         }
 
-        void Ready()
-        {
-            ReceiveAsync<Done>(async m =>
-            {
-                try
-                {
-                    var dr = await _producer.ProduceAsync(topic, new Message<Null, string> { Value = m.Value });
-                    Console.WriteLine($"Delivered '{dr.Value}' to '{dr.TopicPartitionOffset}'");
-                }
-                catch (ProduceException<Null, string> e)
-                {
-                    Console.WriteLine($"Delivery failed: {e.Error.Reason}");
-                }
-            });
-        }
+        class Pull { }
     }
 }
