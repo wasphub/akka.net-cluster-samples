@@ -1,7 +1,9 @@
 ﻿using Akka.Actor;
+using Common.Commands;
+using Common.Logic;
 using System;
 
-namespace Common
+namespace Common.Actors
 {
     public class Worker : ReceiveActor
     {

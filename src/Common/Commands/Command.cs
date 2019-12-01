@@ -1,6 +1,6 @@
 ﻿using Akka.Actor;
 
-namespace Common
+namespace Common.Commands
 {
     public class Command
     {

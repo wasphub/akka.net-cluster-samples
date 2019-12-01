@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Linq;
 
-namespace Common
+namespace Common.Logic
 {
     public static class Functions
     {

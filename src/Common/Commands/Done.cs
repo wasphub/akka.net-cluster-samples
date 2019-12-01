@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Common.Commands
 {
     public class Done
     {

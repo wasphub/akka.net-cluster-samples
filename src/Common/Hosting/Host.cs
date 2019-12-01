@@ -1,7 +1,7 @@
 ﻿using Akka.Actor;
 using System.Threading.Tasks;
 
-namespace Common
+namespace Common.Hosting
 {
     public class Host
     {

@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Common.Hosting;
 using System;
 
 namespace Beacon

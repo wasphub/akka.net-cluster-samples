@@ -2,7 +2,7 @@
 using Akka.Configuration;
 using System.IO;
 
-namespace Common
+namespace Common.Hosting
 {
     public class GenericActorSystemHostFactory : IHostFactory
     {

@@ -1,6 +1,6 @@
 ﻿using Akka.Actor;
 using Akka.Configuration;
-using Common;
+using Common.Hosting;
 using System;
 using System.IO;
 using System.Linq;

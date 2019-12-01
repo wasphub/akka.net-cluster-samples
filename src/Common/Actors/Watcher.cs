@@ -1,7 +1,8 @@
 ﻿using Akka.Actor;
+using Common.Commands;
 using System;
 
-namespace Common
+namespace Common.Actors
 {
     public class Watcher : ReceiveActor
     {
