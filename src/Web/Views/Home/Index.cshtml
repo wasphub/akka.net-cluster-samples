@@ -6,3 +6,47 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://getakka.net/">Akka.Net</a>!</p>
 </div>
+
+<div class="text-center">
+    <h1 class="display-4">Web submitter</h1>
+    <div>
+        <label>Input:</label>
+        <input type="text" id="input" />
+        <button type="submit" onclick="send()">Submit</button>
+    </div>
+    <div>
+        <ul id="results"></ul>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/aspnet-signalr/signalr.js"></script>
+    <script>document.addEventListener('DOMContentLoaded',
+            function() {
+                const connection = new signalR.HubConnectionBuilder()
+                    .withUrl("/results")
+                    .build();
+
+                connection.on("Result", (result) => {
+                    const li = document.createElement("li");
+                    li.textContent = result;
+                    document.getElementById("results").appendChild(li);
+                });
+
+                connection.start().then(function () {
+                    console.log("connected");
+                });
+            });
+
+        function send() {
+            var text = document.getElementById("input").value;
+            fetch("/job",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "text/plain"
+                    },
+                    body: text
+                });
+        }</script>
+}

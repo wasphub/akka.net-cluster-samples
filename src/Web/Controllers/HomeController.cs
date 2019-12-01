@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Akka.Actor;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using Web.Services;
 
 namespace Web.Controllers
@@ -18,5 +22,16 @@ namespace Web.Controllers
         public IActionResult Index() => View();
 
         public IActionResult Privacy() => View();
+
+        [HttpPost("/job")]
+        public async Task Job()
+        {
+            using (var reader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                var input = await reader.ReadToEndAsync();
+
+                _references.Worker.Tell(new Common.Commands.Command(input, _references.Watcher));
+            }
+        }
     }
 }
