@@ -1,6 +1,8 @@
 ﻿using Akka.Actor;
 using Akka.Configuration;
 using Common.Hosting;
+using Petabridge.Cmd.Cluster;
+using Petabridge.Cmd.Host;
 using System;
 using System.IO;
 using System.Linq;
@@ -43,6 +45,9 @@ akka.remote.dot-netty.tcp.port = {port}")
                 .WithFallback(clusterConfig);
 
             var actorSystem = ActorSystem.Create(systemName, finalConfig);
+            var cmd = PetabridgeCmd.Get(actorSystem);
+            cmd.RegisterCommandPalette(ClusterCommands.Instance);
+            cmd.Start();
 
             return actorSystem;
         }
